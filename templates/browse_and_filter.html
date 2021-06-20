@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>web-сервис</title>
+</head>
+<h2>Страница чтения отзывов
+    <a href="http://127.0.0.1:8000/">Страница отправки отзывов</a>
+    <a href="http://127.0.0.1:8000/2/feedbacks/">API</a>
+</h2>
+<form action="{% url 'browse_and_filter' %}" method="get">
+    <p>
+        <label>Сортировка по автору</label><br>
+        <input type="text" name="q" />
+    </p>
+    <p>
+        <label>Сортировка по тексту</label><br>
+        <input type="text" name="w" />
+    </p>
+    <p>
+        <label>Сортировка по оценке</label><br>
+        <select name="e">
+            <option ></option>
+            <option >1</option>
+            <option >2</option>
+            <option >3</option>
+            <option >4</option>
+            <option >5</option>
+        </select>
+    </p>
+    <p>
+        <input type="submit">
+    </p>
+</form>
+<table>
+    <tr><th>Id</th><th>Автор</th><th>Текст</th><th>Оценка</th></tr>
+    {% for Feedback in object_list %}
+    <tr><td>{{ Feedback.id }}</td><td>{{ Feedback.author }}</td><td>{{ Feedback.text }}</td><td>{{ Feedback.rating }}</td></tr>
+    {% endfor %}
+</table>
+</html>
