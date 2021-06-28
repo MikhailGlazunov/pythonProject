@@ -16,9 +16,11 @@ class FeedbacksListView(ListView):
     template_name = 'browse_and_filter.html'
     paginate_by = 10
 
-    def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data, many=isinstance(request.data, list))
-        serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+    def get_queryset(self):
+        author_filter = self.request.GET.get('author')
+        text_filter = self.request.GET.get('text')
+        rating_filter = self.request.GET.get('rating')
+        object_list = Feedback.objects.filter(
+            Q(author__icontains=author_filter) & Q(text__icontains=text_filter) & Q(rating__icontains=rating_filter)
+        )
+        return object_list
