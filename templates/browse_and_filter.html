@@ -38,4 +38,21 @@
     <tr><td>{{ Feedback.id }}</td><td>{{ Feedback.author }}</td><td>{{ Feedback.text }}</td><td>{{ Feedback.rating }}</td></tr>
     {% endfor %}
 </table>
+{% block pagination %}
+  {% if is_paginated %}
+      <div class="pagination">
+          <span class="page-links">
+              {% if page_obj.has_previous %}
+                  <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}&author={{ request.GET.author }}&text={{ request.GET.text }}&rating={{ request.GET.rating }}">previous</a>
+              {% endif %}
+              <span class="page-current">
+                  Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+              </span>
+              {% if page_obj.has_next %}
+                  <a href="{{ request.path }}?page={{ page_obj.next_page_number }}&author={{ request.GET.author }}&text={{ request.GET.text }}&rating={{ request.GET.rating }}">next</a>
+              {% endif %}
+          </span>
+      </div>
+  {% endif %}
+{% endblock %}
 </html>
