@@ -1,15 +1,10 @@
 from django.urls import path
-from django.urls import include
-from polls import views
-from .views import Filtering
-from rest_framework import routers
-
-router = routers.DefaultRouter()
-router.register(r'feedbacks', views.FeedbackViewSet)
+from polls.views import FeedbacksListView, FeedbackCreateView
+from django.views.generic.base import RedirectView
 
 
 urlpatterns = [
-    path('1/', Filtering.as_view(), name='browse_and_filter'),
-    path('', views.create),
-    path('2/', include(router.urls)),
+    path('', RedirectView.as_view(url='create/')),
+    path('browse_and_filter/', FeedbacksListView.as_view(), name='browse_and_filter'),
+    path('create/', FeedbackCreateView.as_view(), name='create'),
 ]
