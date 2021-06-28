@@ -5,21 +5,21 @@
     <title>web-сервис</title>
 </head>
 <h2>Страница чтения отзывов
-    <a href="http://127.0.0.1:8000/">Страница отправки отзывов</a>
-    <a href="http://127.0.0.1:8000/2/feedbacks/">API</a>
+    <a href="http://127.0.0.1:8000/create/">Страница отправки отзывов</a>
+    <a href="http://127.0.0.1:8000/api/feedbacks/">API</a>
 </h2>
 <form action="{% url 'browse_and_filter' %}" method="get">
     <p>
         <label>Сортировка по автору</label><br>
-        <input type="text" name="q" />
+        <input type="text" name="author" />
     </p>
     <p>
         <label>Сортировка по тексту</label><br>
-        <input type="text" name="w" />
+        <input type="text" name="text" />
     </p>
     <p>
         <label>Сортировка по оценке</label><br>
-        <select name="e">
+        <select name="rating">
             <option ></option>
             <option >1</option>
             <option >2</option>
