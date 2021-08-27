@@ -10,15 +10,15 @@
 </h2>
 <form action="{% url 'browse_and_filter' %}" method="get">
     <p>
-        <label>Сортировка по автору</label><br>
+        <label>Фильтрация по автору</label><br>
         <input type="text" name="author" />
     </p>
     <p>
-        <label>Сортировка по тексту</label><br>
+        <label>Фильтрация по тексту</label><br>
         <input type="text" name="text" />
     </p>
     <p>
-        <label>Сортировка по оценке</label><br>
+        <label>Фильтрация по оценке</label><br>
         <select name="rating">
             <option ></option>
             <option >1</option>
@@ -27,6 +27,14 @@
             <option >4</option>
             <option >5</option>
         </select>
+    </p>
+    <p>
+        <input name="sort" type="checkbox" value="author" />
+        <label>Сортировка по автору</label><br>
+        <input name="sort" type="checkbox" value="text" />
+        <label>Сортировка по тексту</label><br>
+        <input name="sort" type="checkbox" value="rating" />
+        <label>Сортировка по оценке</label><br>
     </p>
     <p>
         <input type="submit">
@@ -43,13 +51,13 @@
       <div class="pagination">
           <span class="page-links">
               {% if page_obj.has_previous %}
-                  <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}&author={{ request.GET.author }}&text={{ request.GET.text }}&rating={{ request.GET.rating }}">previous</a>
+                  <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}&author={{ request.GET.author }}&text={{ request.GET.text }}&rating={{ request.GET.rating }}&sort={{ request.GET.sort }}">previous</a>
               {% endif %}
               <span class="page-current">
                   Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
               </span>
               {% if page_obj.has_next %}
-                  <a href="{{ request.path }}?page={{ page_obj.next_page_number }}&author={{ request.GET.author }}&text={{ request.GET.text }}&rating={{ request.GET.rating }}">next</a>
+                  <a href="{{ request.path }}?page={{ page_obj.next_page_number }}&author={{ request.GET.author }}&text={{ request.GET.text }}&rating={{ request.GET.rating }}&sort={{ request.GET.sort }}">next</a>
               {% endif %}
           </span>
       </div>
