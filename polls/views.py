@@ -20,7 +20,8 @@ class FeedbacksListView(ListView):
         author_filter = self.request.GET.get('author')
         text_filter = self.request.GET.get('text')
         rating_filter = self.request.GET.get('rating')
+        sort = self.request.GET.getlist('sort')        
         object_list = Feedback.objects.filter(
             Q(author__icontains=author_filter) & Q(text__icontains=text_filter) & Q(rating__icontains=rating_filter)
-        )
+        ).order_by(*sort)
         return object_list
